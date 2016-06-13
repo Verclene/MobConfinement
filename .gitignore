@@ -1,0 +1,10 @@
+/.classpath
+/.project
+/build.gradle
+/MobConfinement_Client.launch
+/MobConfinement_Server.launch
+/.settings/
+/eclipse/
+/.gradle
+/build/
+/bin/
