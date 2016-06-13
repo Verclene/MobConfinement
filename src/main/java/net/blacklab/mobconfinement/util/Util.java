@@ -5,8 +5,7 @@ import net.blacklab.mobconfinement.MobConfinement;
 import net.blacklab.mobconfinement.items.ItemAdvancedMobConf;
 import net.blacklab.mobconfinement.items.ItemMobConfinement;
 import net.blacklab.mobconfinement.items.ItemUltimateMobConf;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -82,17 +81,29 @@ public class Util {
 
 	public static void renderInstances(){
 		if(!isNormalEggTexture) {
-			ModelBakery.addVariantName(confinementItem, MobConfinement.MODID + ":" + "mobconfinement0", MobConfinement.MODID + ":" + "mobconfinement1");
-			ModelLoader.setCustomModelResourceLocation(confinementItem, 0, new ModelResourceLocation(MobConfinement.MODID + ":" + "mobconfinement0", "inventory"));
-			ModelLoader.setCustomModelResourceLocation(confinementItem, 1, new ModelResourceLocation(MobConfinement.MODID + ":" + "mobconfinement1", "inventory"));
+			ModelResourceLocation confinementR[] = new ModelResourceLocation[]{
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "mobconfinement0", "inventory"),
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "mobconfinement1", "inventory")
+			};
+			ModelLoader.registerItemVariants(confinementItem, confinementR);
+			ModelLoader.setCustomModelResourceLocation(confinementItem, 0, confinementR[0]);
+			ModelLoader.setCustomModelResourceLocation(confinementItem, 1, confinementR[1]);
 
-			ModelBakery.addVariantName(confinementAdv, MobConfinement.MODID + ":" + "adv_mobconfinement0", MobConfinement.MODID + ":" + "adv_mobconfinement1");
-			ModelLoader.setCustomModelResourceLocation(confinementAdv, 0, new ModelResourceLocation(MobConfinement.MODID + ":" + "adv_mobconfinement0", "inventory"));
-			ModelLoader.setCustomModelResourceLocation(confinementAdv, 1, new ModelResourceLocation(MobConfinement.MODID + ":" + "adv_mobconfinement1", "inventory"));
+			ModelResourceLocation advConfinementR[] = new ModelResourceLocation[]{
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "adv_mobconfinement0", "inventory"),
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "adv_mobconfinement1", "inventory")
+			};
+			ModelLoader.registerItemVariants(confinementAdv, advConfinementR);
+			ModelLoader.setCustomModelResourceLocation(confinementAdv, 0, advConfinementR[0]);
+			ModelLoader.setCustomModelResourceLocation(confinementAdv, 1, advConfinementR[1]);
 
-			ModelBakery.addVariantName(confinementUltimate, MobConfinement.MODID + ":" + "ult_mobconfinement0", MobConfinement.MODID + ":" + "ult_mobconfinement1");
-			ModelLoader.setCustomModelResourceLocation(confinementUltimate, 0, new ModelResourceLocation(MobConfinement.MODID + ":" + "ult_mobconfinement0", "inventory"));
-			ModelLoader.setCustomModelResourceLocation(confinementUltimate, 1, new ModelResourceLocation(MobConfinement.MODID + ":" + "ult_mobconfinement1", "inventory"));
+			ModelResourceLocation ultConfinementR[] = new ModelResourceLocation[]{
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "ult_mobconfinement0", "inventory"),
+					new ModelResourceLocation(MobConfinement.MODID + ":" + "ult_mobconfinement1", "inventory")
+			};
+			ModelLoader.registerItemVariants(confinementUltimate, ultConfinementR);
+			ModelLoader.setCustomModelResourceLocation(confinementUltimate, 0, ultConfinementR[0]);
+			ModelLoader.setCustomModelResourceLocation(confinementUltimate, 1, ultConfinementR[1]);
 		} else {
 			ModelLoader.setCustomModelResourceLocation(confinementItem, 0, new ModelResourceLocation("minecraft:egg", "inventory"));
 			ModelLoader.setCustomModelResourceLocation(confinementItem, 1, new ModelResourceLocation("minecraft:egg", "inventory"));

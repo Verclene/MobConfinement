@@ -19,14 +19,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemMobConfinement extends Item
 {
-	
+
 	public boolean caught = false;
 
 	/*
@@ -36,7 +40,7 @@ public class ItemMobConfinement extends Item
 		this.setMaxStackSize(64);
 	}
 	*/
-	
+
 	public boolean isCatchableBase(Entity living){
 		if(living instanceof EntityLiving){
 			if(((EntityLiving)living).isDead){
@@ -65,37 +69,38 @@ public class ItemMobConfinement extends Item
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn,
-			World worldIn, BlockPos pos, EnumFacing side, float hitX,
-			float hitY, float hitZ) {
-		// TODO 自動生成されたメソッド・スタブ
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		int blockX = pos.getX();
 		int blockY = pos.getY();
 		int blockZ = pos.getZ();
 		Block block = worldIn.getBlockState(pos).getBlock();
-		blockX += side.getFrontOffsetX();
-		blockY += side.getFrontOffsetY();
-		blockZ += side.getFrontOffsetZ();
+		blockX += facing.getFrontOffsetX();
+		blockY += facing.getFrontOffsetY();
+		blockZ += facing.getFrontOffsetZ();
 		double advance = 0.0D;
 
-		if (side.getIndex() == 1 && block != null && block.getRenderType() == 11)
+		/*
+		if (facing.getIndex() == 1 && block != null && block.getRenderType() == 11)
 		{
 			advance = 0.5D;
 		}
+		*/
 
 		if (this.spawnEntity(stack, playerIn, worldIn, (double)blockX + 0.5D, (double)blockY + advance, (double)blockZ + 0.5D) && !playerIn.capabilities.isCreativeMode)
 		{
-			worldIn.playSoundAtEntity(playerIn, "random.splash", 0.2F, ((playerIn.getRNG().nextFloat() - playerIn.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			playerIn.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("random.splash")), 0.2F,
+					((playerIn.getRNG().nextFloat() - playerIn.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			if (stack.stackSize <= 0)
 			{
 				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, (ItemStack)null);
 			}
 
-			return true;
+			return EnumActionResult.SUCCESS;
 		}else
 		{
-			return false;
+			return EnumActionResult.PASS;
 		}
 	}
 
@@ -106,7 +111,7 @@ public class ItemMobConfinement extends Item
 	public boolean hitEntity(ItemStack itemStack, EntityLivingBase living, EntityLivingBase user)
 	{
 		return super.hitEntity(itemStack, living, user);
-		
+
 		/*
 		if(living.isDead){
 			living.setHealth(1.0f);
@@ -126,15 +131,15 @@ public class ItemMobConfinement extends Item
 			return false;
 		}
 		*/
-		
+
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer user,
 			Entity living) {
 		//return super.onLeftClickEntity(itemStack, user, living);
 		// TODO Auto-generated method stub
-		
+
 		/*
 		if(living.isDead){
 			((EntityLivingBase) living).setHealth(1.0f);
@@ -146,7 +151,7 @@ public class ItemMobConfinement extends Item
 		{
 			//キャンセル条件(HP20超・敵MOB無効)
 			if(!isCatchableBase(living)) return false;
-			
+
 			//メイド処理(1.8凍結)
 			/*
 			try{
@@ -164,7 +169,8 @@ public class ItemMobConfinement extends Item
 			*/
 
 			this.executeCatch(user, (EntityLiving)living);
-			living.worldObj.playSoundAtEntity(living, "random.splash", 0.2F, ((((EntityLivingBase) living).getRNG().nextFloat() - ((EntityLivingBase) living).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			living.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("random.splash")), 0.2F,
+					((((EntityLivingBase) living).getRNG().nextFloat() - ((EntityLivingBase) living).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 			living.setDead();
 			return true;
 		}
@@ -172,9 +178,9 @@ public class ItemMobConfinement extends Item
 		{
 			return false;
 		}
-		
+
 	}
-	
+
 	public void executeCatch(EntityPlayer player, EntityLiving living){
 		//カスタム時ここをOverride
 		executeCatch(Util.confinementItem,player,living);
@@ -207,12 +213,12 @@ public class ItemMobConfinement extends Item
 				nbttagcompound.setString("NameTag", "Unknown");
 			}
 
-			
+
 			//System.out.println("ITEMDAMAGE:"+itemStack.getItemDamage());
 
 			ItemStack myCurrentItem = player.inventory.getCurrentItem();
 			myCurrentItem.stackSize--;
-			
+
 			if (myCurrentItem.stackSize <= 0)
 			{
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, itemStack);
@@ -223,7 +229,7 @@ public class ItemMobConfinement extends Item
 			}
 
 			living.setDead();
-			
+
 		}else{
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 		}
@@ -254,17 +260,18 @@ public class ItemMobConfinement extends Item
 				{
 					nbttagcompound.getIntArray("littlemaidmobx:textureindex");
 					nbttagcompound.getInteger("littlemaidmobx:color");
-					
+
 					entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
 					((EntityLiving)entity).rotationYawHead = ((EntityLiving)entity).rotationYaw;
 					((EntityLiving)entity).renderYawOffset = ((EntityLiving)entity).rotationYaw;
-					world.playSoundAtEntity(entity, "random.splash", 0.2F, ((((EntityLiving)entity).getRNG().nextFloat() - ((EntityLiving)entity).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+					entity.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("random.splash")), 0.2F,
+							((((EntityLivingBase) entity).getRNG().nextFloat() - ((EntityLivingBase) entity).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					((EntityLiving)entity).playLivingSound();
-					
+
 					if (!world.isRemote)
 					{
 						world.spawnEntityInWorld(onEntitySpawn((EntityLiving)entity,itemStack));
-						
+
 						//メイド処理(1.8凍結)
 						/*
 						try{
@@ -283,9 +290,9 @@ public class ItemMobConfinement extends Item
 							e.printStackTrace();
 						}
 						*/
-						
+
 					}
-					
+
 					//名前をデフォルトに戻す
 					ItemStack a = new ItemStack(itemStack.getItem(),1,0);
 					itemStack.setStackDisplayName(a.getDisplayName());
@@ -301,19 +308,19 @@ public class ItemMobConfinement extends Item
 			}
 		}
 	}
-	
+
 	protected void onSpawned(ItemStack stack){
 		//EnchanterConfinement向け。タグリセットの設定
 		stack.setTagCompound((NBTTagCompound)null);
 	}
-	
+
 	protected Entity onEntitySpawn(EntityLiving entity, ItemStack stack){
 		//EnchanterConfinement向け。スポーン時の特殊効果の設定
 		//spawnEntityでしか呼ばれないので、引数はEntityLiving固定。
 		return entity;
 	}
-	
-	
+
+
 
 	public boolean func_77636_d(ItemStack itemStack)
 	{

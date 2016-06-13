@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(
 		modid = MobConfinement.MODID,
 		name = "MobConfinement_EB",
-		version = "2.4.0.2",
-		dependencies = "required-after:net.blacklab.lib@[3.3.13,);required-after:Forge@[11.14.1.1334,)"
+		version = "3.4.0.3",
+		dependencies = "required-after:net.blacklab.lib@[5.2.0.3,);required-after:Forge@[1.9-12.16.0.1819,)"
 )
 /*
 @NetworkMod(
