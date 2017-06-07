@@ -89,7 +89,7 @@ public class ItemMobConfinement extends Item
 
 		if (this.spawnEntity(stack, playerIn, worldIn, (double)blockX + 0.5D, (double)blockY + advance, (double)blockZ + 0.5D) && !playerIn.capabilities.isCreativeMode)
 		{
-			playerIn.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
+			playerIn.playSound(SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
 					((playerIn.getRNG().nextFloat() - playerIn.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			if (stack.stackSize <= 0)
@@ -169,7 +169,7 @@ public class ItemMobConfinement extends Item
 			*/
 
 			this.executeCatch(user, (EntityLiving)living);
-			living.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
+			living.playSound(SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
 					((((EntityLivingBase) living).getRNG().nextFloat() - ((EntityLivingBase) living).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 			living.setDead();
 			return true;
@@ -261,10 +261,10 @@ public class ItemMobConfinement extends Item
 					nbttagcompound.getIntArray("littlemaidmobx:textureindex");
 					nbttagcompound.getInteger("littlemaidmobx:color");
 
-					entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
+					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
 					((EntityLiving)entity).rotationYawHead = ((EntityLiving)entity).rotationYaw;
 					((EntityLiving)entity).renderYawOffset = ((EntityLiving)entity).rotationYaw;
-					entity.playSound(SoundEvent.soundEventRegistry.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
+					entity.playSound(SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.hostile.splash")), 0.2F,
 							((((EntityLivingBase) entity).getRNG().nextFloat() - ((EntityLivingBase) entity).getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					((EntityLiving)entity).playLivingSound();
 

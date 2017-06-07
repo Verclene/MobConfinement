@@ -32,11 +32,11 @@ public class Util {
 	public static void register(){
 		//登録作業
 		confinementItem = (new ItemMobConfinement()).
-				setUnlocalizedName("mobconfinement").setCreativeTab(CreativeTabs.tabMisc);
+				setUnlocalizedName("mobconfinement").setCreativeTab(CreativeTabs.MISC);
 		//一段階上位(エンダーパール*2＋ブレイズロッド*2+MobConfinement)
 		confinementAdv = new ItemAdvancedMobConf()
 			.setUnlocalizedName("mobconfinementadvanced")
-			.setCreativeTab(CreativeTabs.tabMisc);
+			.setCreativeTab(CreativeTabs.MISC);
 		//最上位
 		confinementUltimate = new ItemUltimateMobConf()
 			.setUnlocalizedName("mobconfinementultimate")
@@ -53,7 +53,7 @@ public class Util {
 			//以前のレシピで作成
 			GameRegistry.addShapelessRecipe(
 					new ItemStack(confinementItem,1,0),
-					new Object[] {new ItemStack(Items.egg, 1, 0), new ItemStack(Items.redstone, 1, 0)});
+					new Object[] {new ItemStack(Items.EGG, 1, 0), new ItemStack(Items.REDSTONE, 1, 0)});
 		}else{
 			//新レシピで作成
 			GameRegistry.addRecipe(
@@ -61,7 +61,7 @@ public class Util {
 					" X ",
 					"XYX",
 					" X ",
-					'X',Items.egg,'Y',Items.redstone);
+					'X',Items.EGG,'Y',Items.REDSTONE);
 		}
 
 		GameRegistry.addRecipe(
@@ -69,14 +69,14 @@ public class Util {
 				" X ",
 				"YZY",
 				" X ",
-				'X',Items.ender_pearl,'Y',Items.blaze_rod,'Z',new ItemStack(confinementItem,1,0));
+				'X',Items.ENDER_PEARL,'Y',Items.BLAZE_ROD,'Z',new ItemStack(confinementItem,1,0));
 
 		GameRegistry.addRecipe(
 				new ItemStack(confinementUltimate,1,0),
 				"XXX",
 				"XYX",
 				"XXX",
-				'X',Blocks.diamond_block,'Y',new ItemStack(confinementAdv,1,0));
+				'X',Blocks.DIAMOND_BLOCK,'Y',new ItemStack(confinementAdv,1,0));
 	}
 
 	public static void renderInstances(){
