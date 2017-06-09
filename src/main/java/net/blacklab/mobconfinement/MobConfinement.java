@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(
 		modid = MobConfinement.MODID,
 		name = "MobConfinement_EB",
-		version = "4.0.0.6",
+		version = "4.0.0.7",
 		dependencies = "required-after:net.blacklab.lib@[6.1.3.6,);required-after:Forge@[1.9.4-12.17.0.1976,)",
 		acceptedMinecraftVersions = "[1.9.4,1.10.2]"
 )
@@ -48,7 +48,6 @@ public class MobConfinement
 		}
 
 		Util.isNormalEggTexture = Util.conf.getBoolean("isNormalEggTexture", false);
-		Util.confinementDefaultUpLimit = Util.conf.getInt("hpUpLimit", 20);
 		Util.isTraditionalRecipe = Util.conf.getBoolean("isTraditionalRecipe", false);
 		//Util.isLMMXDisableFreedom = Util.conf.getProperty("isLMMXDisableFreedom", true).getBoolean();
 
