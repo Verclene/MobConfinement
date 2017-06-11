@@ -14,6 +14,7 @@ public class ModConstants {
 	public static final class Strings {
 		
 		public static String TIER_KEY = "MCONF_TIER";
+		public static final String MODID = "mobconfinement";
 
 	}
 	

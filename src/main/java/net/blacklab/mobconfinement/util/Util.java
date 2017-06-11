@@ -2,6 +2,7 @@ package net.blacklab.mobconfinement.util;
 
 import net.blacklab.mobconfinement.items.ItemMobConfinement;
 import net.blacklab.mobconfinement.recipe.RecipeConfinementUpgrade;
+import net.blacklab.mobconfinement.util.ModConstants.Strings;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -36,7 +37,12 @@ public class Util {
 	}
 
 	public static void renderInstances(){
-		ModelLoader.setCustomModelResourceLocation(ModConstants.Items.confinementItem, 0, new ModelResourceLocation("minecraft:egg", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(ModConstants.Items.confinementItem, 1, new ModelResourceLocation("minecraft:egg", "inventory"));
+		ModelResourceLocation confinementR[] = new ModelResourceLocation[]{
+				new ModelResourceLocation(Strings.MODID + ":" + "mobconfinement0", "inventory"),
+				new ModelResourceLocation(Strings.MODID + ":" + "mobconfinement1", "inventory")
+		};
+		ModelLoader.registerItemVariants(ModConstants.Items.confinementItem, confinementR);
+		ModelLoader.setCustomModelResourceLocation(ModConstants.Items.confinementItem, 0, confinementR[0]);
+		ModelLoader.setCustomModelResourceLocation(ModConstants.Items.confinementItem, 1, confinementR[1]);
 	}
 }

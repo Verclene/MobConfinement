@@ -1,0 +1,6 @@
+{
+	"parent": "mobconfinement:item/confinement_base",
+	"textures": {
+		"TEXTURE": "mobconfinement:items/confinement_1"
+	}
+}

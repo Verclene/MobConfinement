@@ -1,6 +1,0 @@
-{
-	"parent": "net.blacklab.mobconfinement:item/confinement_base",
-	"textures": {
-		"TEXTURE": "net.blacklab.mobconfinement:items/confinement_0"
-	}
-}
