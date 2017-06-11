@@ -142,7 +142,7 @@ public class ItemMobConfinement extends Item
 			Entity living) {
 		if (user instanceof EntityPlayer && living instanceof EntityLiving) {
 			if (itemStack.hasTagCompound()) {
-				if (itemStack.getTagCompound().getBoolean("Conf")) {
+				if (itemStack.getTagCompound().hasKey("Mob")) {
 					return false;
 				}
 			}
@@ -201,7 +201,6 @@ public class ItemMobConfinement extends Item
 			entityNBT.setTag("Motion", this.newDoubleNBTList(new double[] {0.0D, 0.0D, 0.0D}));
 			entityNBT.setFloat("FallDistance", 0.0F);
 			nbttagcompound.setTag("Mob", entityNBT);
-			nbttagcompound.setBoolean("Conf", true);
 			nbttagcompound.setInteger(ModConstants.Strings.TIER_KEY, lCurrentTier);
 
 			String customName = living.hasCustomName() ? living.getCustomNameTag() : entityName;
