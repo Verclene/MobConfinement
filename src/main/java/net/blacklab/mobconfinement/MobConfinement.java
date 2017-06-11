@@ -11,17 +11,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(
 		modid = Strings.MODID,
 		name = "MobConfinement_EB",
-		version = "4.0.1.9",
+		version = "4.0.1.10",
 		dependencies = "required-after:net.blacklab.lib@[6.1.4.7,);"
 				+ "required-after:Forge@[1.9.4-12.17.0.1976,)",
-		acceptedMinecraftVersions = "[1.9.4,1.10.2]"
+		acceptedMinecraftVersions = "[1.9.4,1.10.2]",
+		acceptableRemoteVersions = "*"
 )
-/*
-@NetworkMod(
-		clientSideRequired = true,
-		serverSideRequired = true
-)
-*/
 public class MobConfinement
 {
 	@Instance(Strings.MODID)
