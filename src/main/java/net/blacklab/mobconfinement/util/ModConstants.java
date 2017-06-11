@@ -20,5 +20,5 @@ public class ModConstants {
 	public static final class Integers {
 		public static int HP_PER_TIER = 20;
 	}
-
+	
 }
