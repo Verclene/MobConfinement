@@ -14,7 +14,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		modid = MobConfinement.MODID,
 		name = "MobConfinement_EB",
 		version = "4.0.0.7",
-		dependencies = "required-after:net.blacklab.lib@[6.1.3.6,);required-after:Forge@[1.9.4-12.17.0.1976,)",
+		dependencies = "required-after:net.blacklab.lib@[6.1.4.7,);"
+				+ "required-after:Forge@[1.9.4-12.17.0.1976,)",
 		acceptedMinecraftVersions = "[1.9.4,1.10.2]"
 )
 /*
@@ -61,7 +62,7 @@ public class MobConfinement
 		}
 		Util.register();
 
-		//テクスチャ・モデル指定JSONファイル名の登録。
+		//繝�繧ｯ繧ｹ繝√Ε繝ｻ繝｢繝�繝ｫ謖�螳哽SON繝輔ぃ繧､繝ｫ蜷阪�ｮ逋ｻ骭ｲ縲�
 		if (event.getSide().isClient()) {
 			Util.renderInstances();
 		}
