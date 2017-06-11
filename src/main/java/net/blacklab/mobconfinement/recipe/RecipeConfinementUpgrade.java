@@ -25,6 +25,7 @@ public class RecipeConfinementUpgrade extends ShapedRecipes {
 		NBTTagCompound lCompound = null;
 		
 		ItemStack lStack = inv.getStackInRowAndColumn(1, 1).copy();
+		lStack.stackSize = 1;
 
 		if (lStack != null && lStack.getItem() == ModConstants.Items.confinementItem) {
 			// 該当アイテムなら

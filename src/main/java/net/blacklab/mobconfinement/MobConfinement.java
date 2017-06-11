@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(
 		modid = Strings.MODID,
 		name = "MobConfinement_EB",
-		version = "4.0.1.9",
+		version = "4.0.2.11",
 		dependencies = "required-after:net.blacklab.lib@[6.1.4.7,);"
 				+ "required-after:Forge@[1.9.4-12.17.0.1976,)",
 		acceptedMinecraftVersions = "[1.9.4,1.10.2]"
